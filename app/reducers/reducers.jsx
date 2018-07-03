@@ -25,8 +25,7 @@ export const ticketsReducer = (state=[], action) => {
           city: action.task.city,
           completed: action.task.completed,
           completedAt: action.task.completedAt,
-          category: action.task.category,
-          reward: action.task.reward
+          category: action.task.category
         }
       }
     })

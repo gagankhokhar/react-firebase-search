@@ -11,7 +11,7 @@ class Task extends Component {
 
   render () {
 
-    const {id, name, location, info, description, cityImg, createdAt, city, reward} = this.props;
+    const {id, name, location, info, description, cityImg, createdAt, city} = this.props;
     const imgSrc = cityImg || placeholder;
     const date = moment.unix(createdAt).format('MMMM Do, YYYY @ k:mm ');
     return (
@@ -19,7 +19,6 @@ class Task extends Component {
         <img src={imgSrc}/>
         <div>
         <h3>{name}</h3>
-        <p><span className='colored'>Reward:</span> {reward}</p>
         <p><span className='colored'>Adress:</span> {city}, {location}</p>
         <p><span className='colored'>Created at:</span> {date}</p>
         </div>

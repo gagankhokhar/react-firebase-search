@@ -7,12 +7,13 @@ export const noDupe = (arr, key) => {
   return arrWithoutDupe
 }
 
-export const getPlace = (input) => {
 
+export const getPlace = (input) => {
+   
   const encodedLocation = input.trim().replace(/\s+/g, '-').toLowerCase();
   const places = `https://api.teleport.org/api/urban_areas/`;
   const requestUrl = `${places}slug:${encodedLocation}/images/`;
-
+   
   return axios.get(requestUrl).then((res) => {
       return res.data;
     }, (err) => {

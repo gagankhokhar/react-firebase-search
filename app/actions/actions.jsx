@@ -1,5 +1,68 @@
 import firebase, {firebaseRef} from 'firebaseConf'
 import moment from 'moment'
+import Rating from 'rating'
+
+
+
+
+export const startRating = (ratingValue) => {
+
+  return (dispatch, getState) => {
+
+    const uid = getState().auth.uid;
+    const ratingRef = firebaseRef.child('reviews').push(rating);
+
+
+    return ratingRef.then(() => {
+      dispatch(addRating({
+        ...rating,
+        id: ratingRef.value
+      }))
+    })
+  }
+};
+
+export const addReviews = (commentVal) => {
+  return (dispatch, getState) => {
+    const createdAt = moment().unix();
+    const formatedDate = moment.unix(createdAt).format('MMMM, YYYY');
+    const review =
+      {
+        ...commentVal,
+        completed: 'Not completed',
+        createdAt,
+        completedAt: null,
+        formatedDate
+       };
+    const commentRef = firebaseRef.child('reviews').push(review);
+    return commentRef.then(() => {
+      dispatch(addComment({
+        ...review,
+        id: commentRef.key
+      }))
+    })
+  }
+};
+
+
+export const startGetReviews = () => {
+  return (dispatch, getState) => {
+      const commentRef = firebaseRef.child('reviews');
+      return commentRef.once('value').then((snapshot) => {
+        const commentsVal = snapshot.val() || {};
+        let reviews = [];
+        const tasksKeys = Object.keys(commentsVal);
+        tasksKeys.forEach((id) => {
+          reviews.push({
+            id,
+            ...commentVal[id]
+          });
+        });
+        console.log(reviews);
+        dispatch(addComments(reviews))
+      })
+  }
+};
 
 export const startAddTask = (taskVal) => {
   return (dispatch, getState) => {
@@ -36,6 +99,7 @@ export const startGetTasks = () => {
             ...tasksVal[id]
           });
         });
+        console.log(tasks);
         dispatch(addTasks(tasks))
       })
   }
@@ -51,6 +115,13 @@ export const show = (id) => {
     }
 }
 
+
+export const commentShow = (id) => {
+    return (dispatch, getState) =>{
+        const commentRef = firebaseRef.child('reviews/${id}');
+        return commentRef.once('value')
+    }
+}
 
 
 
@@ -158,6 +229,14 @@ export const addTask = (task) => {
   return {
     type:'ADD_TASK',
     task
+  };
+}
+
+
+export const addComment = (task) => {
+  return {
+    type:'ADD_COMMENT',
+    comment
   };
 }
 

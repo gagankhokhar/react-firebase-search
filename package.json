@@ -37,6 +37,7 @@
     "react-ionicons": "^1.5.7",
     "react-redux": "^5.0.5",
     "react-router": "^2.0.0",
+    "react-star-rating-component": "^1.4.1",
     "redux": "^3.7.2",
     "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",

@@ -21,7 +21,6 @@ class Sort extends Component {
         <a data-sort='completed'>Completed</a>
         <a data-sort='name'>Task`s name</a>
         <a data-sort='city'>City</a>
-        <a data-sort='reward'>Reward</a>
       </div>
     )
   }

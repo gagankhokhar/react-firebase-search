@@ -9,23 +9,27 @@ class AddTask extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cities: []
+      cities: [],
+      hidden: true
     }
   }
-    
+
   check () {
       const refsKeys = Object.keys(this.refs);
         refsKeys.forEach((key) => {
-            if (!this.refs[key].value && key !== 'form') {
+        const node = document.createElement('LABEL');
+        node.classList.add('warning-lable');
+        const textNode = document.createTextNode('This field can\'t be empty!');
+        node.appendChild(textNode);
+         
+        if (!this.refs[key].value && key !== 'form' && key !== 'category') {
+          this.refs[key].parentElement.appendChild(node);
+        }
+         
+      });
+    }
 
-                const node = document.createElement('LABEL');                 
-                const textNode = document.createTextNode('This field can\'t be empty!');      
-                node.appendChild(textNode); 
-                this.refs[key].parentElement.appendChild(node);
-                
-            }
-        });
-  }
+
 
   handleGetCities () {
       //probaly may create erros
@@ -56,7 +60,7 @@ class AddTask extends Component {
     const info = this.refs.info.value;
     const description = this.refs.description.value;
     const city = this.refs.city.value;
-    const reward = this.refs.reward.value;
+    const category = this.refs.category.innerHTML;
     let latLng ={};
     let cityImg = '';
     const fulllocation = `${city}, ${location}`;
@@ -82,7 +86,7 @@ class AddTask extends Component {
           info,
           description,
           city: cityArr[0].trim(),
-          reward,
+          category,
           latLng,
           cityImg
         };
@@ -107,6 +111,13 @@ class AddTask extends Component {
     })
   }
 
+  selectCategory (e) {
+    console.log(e.target.innerHTML);
+    if (e.target && e.target.nodeName == 'P') {
+      this.refs.category.innerHTML = e.target.innerHTML;
+      this.showList()
+    }
+  }
 
   render () {
 
@@ -118,42 +129,61 @@ class AddTask extends Component {
         return <ul className='list-unstyled city-auto'>{predictions}</ul>
       }
     }
+    const renderCategoryList = () => {
+      if(!this.state.hidden) {
+        return (
+          <div onClick={this.selectCategory.bind(this)} className='hidden'>
+            <p>Baby Products</p>
+            <p>Activities for Kids</p>
+            <p>Toys & Gifts</p>
+            <p>DIY</p>
+            <p>Other</p>
+          </div>
+        )
+      }
+    }
     return (
       <div className='add-ticket'>
-        <h3 className='action-title'>Add new ticket</h3>
+        <h3 className='action-title'>Add new Store</h3>
         <h6>All fiels are required</h6>
           <form ref='form' onSubmit={this.addNewTask.bind(this)}>
             <div className='row'>
               <div className='col-6'>
                 <div className="form-group">
-                  <label>Ticket</label>
-                  <input ref='name' type="text" className="form-control"  placeholder="Enter name of your ticket"/>
+                  <label>Name</label>
+                  <input ref='name' type="text" className="form-control"  placeholder="Enter name of Store"/>
                 </div>
                 <div className="form-group">
-                  <label>Your city</label>
-                  <input onChange={this.handleGetCities.bind(this)} ref='city' type="text" className="form-control"  placeholder="Enter your city name"/>
+                  <label>Category</label>
+                  <div className='drop-wrap'>
+                    <div onClick={this.showList.bind(this)} ref='category' className="form-control category-list">
+                      Other
+                    </div>
+                    {renderCategoryList()}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>Store City</label>
+                  <input onChange={this.handleGetCities.bind(this)} ref='city' type="text" className="form-control"  placeholder="Enter Store City name"/>
                     {renderList()}
                 </div>
               </div>
               <div className='col-6'>
                 <div className="form-group">
-                  <label>Ticket location</label>
-                  <input ref='location' type="text" className="form-control"  placeholder="Enter location of your ticket"/>
+                  <label>Store Location</label>
+                  <input ref='location' type="text" className="form-control"  placeholder="Enter location of your store"/>
                 </div>
                 <div className="form-group">
-                  <label>Reward</label>
-                  <input ref='reward' type="text" className="form-control"  placeholder="Enter reward if u want"/>
-                </div>
-                <div className="form-group">
-                  <label>Your contact info</label>
-                  <input ref='info' type="text" className="form-control"  placeholder="Enter your contact info"/>
+                  <label>Store Contact info</label>
+                  <input ref='info' type="text" className="form-control"  placeholder="Enter your Store Contact info"/>
                 </div>
               </div>
             </div>
 
             <div className="form-group">
               <label>Description</label>
-              <textarea ref='description' rows="5" className="form-control"  placeholder="Enter your ticket's description"/>
+              <textarea ref='description' rows="5" className="form-control"  placeholder="Enter your description"/>
             </div>
             <button type="submit" className="btn">Submit</button>
           </form>

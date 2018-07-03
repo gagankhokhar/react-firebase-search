@@ -43,13 +43,7 @@ class ControlsBar extends Component{
       <nav className="navbar navbar-expand-lg">
 
           <ul className="navbar-nav mr-auto controls-list">
-            <li  className="nav-item date-hover">
-              <a className="btn" href="#">Date</a>
-              <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
-                {arrWithoutDupe}
-                <p data-key='formatedDate'>All</p>
-              </div>
-            </li>
+           
             <li  className="nav-item date-hover">
               <a className="btn" href="#">City</a>
               <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
@@ -58,21 +52,12 @@ class ControlsBar extends Component{
               </div>
             </li>
             <li className="nav-item date-hover">
-              <a className="btn" href="#">Status</a>
-                <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
-                  <p data-key='completed'>Completed</p>
-                  <p data-key='completed'>Not completed</p>
-                  <p data-key='completed'>All</p>
-                </div>
-            </li>
-            <li className="nav-item date-hover">
               <a className="btn" href="#">Category</a>
                 <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
-                  <p data-key='category'>Pets</p>
-                  <p data-key='category'>Cleening</p>
-                  <p data-key='category'>Constructions</p>
-                  <p data-key='category'>Mooving</p>
-                  <p data-key='category'>Other</p>
+                  <p data-key='category'>Baby Products</p>
+                  <p data-key='category'>Activities for Kids</p>
+                  <p data-key='category'>Toys & Gifts</p>
+                  <p data-key='category'>DIY</p>
                   <p data-key='category'>All</p>
                 </div>
             </li>

@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import {styles} from 'MapStyle'
 import {show} from 'actions'
+import {commentShow} from 'actions'
+import * as API from 'API'
+import * as actions from 'actions'
+import Rating from 'rating'
 
 class ShowTask extends Component {
   constructor (props) {
@@ -15,9 +19,20 @@ class ShowTask extends Component {
       info: '',
       city: '',
       category: '',
-      reward: '',
-      email: ''
-    }
+      email: '',
+      rating: 0,
+      comment: '',
+      reviews: [
+          {content: 'This is a test review'},
+          {content: 'Oh hai, world!'}
+      ],
+      commentBeingTyped: ''
+    };
+    this.setRating = this.setRating.bind(this);
+  }
+
+  setRating(n) {
+      this.setState({rating: n});
   }
 
   componentDidMount () {
@@ -45,11 +60,11 @@ class ShowTask extends Component {
       info: res.info,
       city: res.city,
       category: res.category,
-      reward: res.reward,
       email: res.email,
       createdAt: res.createdAt,
-      latLng: res.latLng
-    }, this.setMap(res.latLng)
+      latLng: res.latLng,
+      comment: res.comment,
+    }, this.setMap(res.latLng),
     );
     })
   }
@@ -62,15 +77,45 @@ class ShowTask extends Component {
     });
 
     const marker = new google.maps.Marker({
-    position: latLng,
-    map: map
-  });
+      position: latLng,
+      map: map
+    });
+  }
+
+  check () {
+      const refsKeys = Object.keys(this.refs);
+        refsKeys.forEach((key) => {
+        const node = document.createElement('LABEL');
+        node.classList.add('warning-lable');
+        const textNode = document.createTextNode('This field can\'t be empty!');
+        node.appendChild(textNode);
+         
+        if (!this.refs[key].value && key !== 'form' && key !== 'comment') {
+          this.refs[key].parentElement.appendChild(node);
+        }
+         
+      });
+    }
+
+
+
+  addNewComment (e) {
+    e.preventDefault();
+    this.check();
+    const comment = this.refs.comment.value;
+
+    const review = {
+      comment
+    };
+    this.props.dispatch(actions.addReviews(review));
+    this.refs.form.reset();
   }
 
 
-
   render () {
-    const {name, location, description, info, city, category, reward, email, createdAt} = this.state;
+    const { rating } = this.state;
+    const {comment} = this.state;
+    const {name, location, description, info, city, category, email, createdAt} = this.state;
     const date = moment.unix(createdAt).format('MMMM Do, YYYY @ k:mm ');
     const userEmail = email || 'Anonimus';
     return (
@@ -80,16 +125,36 @@ class ShowTask extends Component {
         <p><span className='colored-gray'>Created at:</span> {date}</p>
         <p><span className='colored-gray'>Location:</span> {city}, {location}</p>
         <p><span className='colored-gray'>Contact info:</span> {info}</p>
-        <p><span className='colored-gray'></span>{description}</p>
-        <p><span className='colored-gray'>Reward:</span> {reward}</p>
-        <p>{userEmail}</p>
-          <div ref='map' className='map-show-task'>
-            <p>Map will be here</p>
+        <p><span className='colored-gray'>Description:</span> {description}</p>
+
+        <div ref='map' className='map-show-task'>
+          <p>Map will be here</p>
+        </div>
+
+        <div ref='map' className='map-show-task'>
+          <p>Map will be here</p>
+        </div>
+
+        <Rating rating={this.state.rating} setRating={this.setRating} /> 
+
+
+        <form ref='form' onSubmit={this.addNewComment.bind(this)}>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea ref='comment' rows="5" className="form-control"  placeholder="Enter your comment"/>
           </div>
+          <button type="submit" className="btn">Submit</button>
+        </form>
+
+          
+          <p><span className='colored-gray'>Reviews:</span> {comment}</p>
       </div>
+
     )
   }
 }
+
+
 
 export default connect(({tickets}) => {
   return {

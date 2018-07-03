@@ -15,7 +15,6 @@ class EditTask extends Component {
       info: '',
       city: '',
       completed: '',
-      reward: '',
       hidden: true
     }
   }
@@ -53,8 +52,7 @@ class EditTask extends Component {
       description: this.state.description,
       info: this.state.info,
       city: this.state.city,
-      completed: this.state.completed,
-      reward: this.state.reward
+      completed: this.state.completed
 
     };
     
@@ -86,8 +84,7 @@ class EditTask extends Component {
       id: current.id,
       info: current.info,
       city: current.city,
-      completed: current.completed,
-      reward: current.reward
+      completed: current.completed
     })
   }
 
@@ -136,10 +133,6 @@ class EditTask extends Component {
                 <div className="form-group">
                   <label>Ticket location</label>
                   <input data-ref='location' onChange={this.handleEdit.bind(this)} value={this.state.location} ref='location' type="text" className="form-control"  placeholder="Enter location of your ticket"/>
-                </div>
-                <div className="form-group">
-                  <label>Reward</label>
-                  <input data-ref='reward' onChange={this.handleEdit.bind(this)} value={this.state.reward} ref='reward' type="text" className="form-control"  placeholder="Enter reward if u want"/>
                 </div>
                 <div className="form-group">
                   <label>Your contact info</label>
