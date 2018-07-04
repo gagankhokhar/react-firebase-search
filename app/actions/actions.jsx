@@ -1,68 +1,79 @@
-import firebase, {firebaseRef} from 'firebaseConf'
+import firebase, {firebaseRef} from '../firebase/index'
 import moment from 'moment'
-import Rating from 'rating'
+// import Rating from 'rating'
 
 
 
 
-export const startRating = (ratingValue) => {
+// export const startRating = (ratingValue) => {
 
-  return (dispatch, getState) => {
+//   return (dispatch, getState) => {
 
-    const uid = getState().auth.uid;
-    const ratingRef = firebaseRef.child('reviews').push(rating);
-
-
-    return ratingRef.then(() => {
-      dispatch(addRating({
-        ...rating,
-        id: ratingRef.value
-      }))
-    })
-  }
-};
-
-export const addReviews = (commentVal) => {
-  return (dispatch, getState) => {
-    const createdAt = moment().unix();
-    const formatedDate = moment.unix(createdAt).format('MMMM, YYYY');
-    const review =
-      {
-        ...commentVal,
-        completed: 'Not completed',
-        createdAt,
-        completedAt: null,
-        formatedDate
-       };
-    const commentRef = firebaseRef.child('reviews').push(review);
-    return commentRef.then(() => {
-      dispatch(addComment({
-        ...review,
-        id: commentRef.key
-      }))
-    })
-  }
-};
+//     const uid = getState().auth.uid;
+//     const ratingRef = firebaseRef.database().ref('users/review').push(rating);
 
 
-export const startGetReviews = () => {
-  return (dispatch, getState) => {
-      const commentRef = firebaseRef.child('reviews');
-      return commentRef.once('value').then((snapshot) => {
-        const commentsVal = snapshot.val() || {};
-        let reviews = [];
-        const tasksKeys = Object.keys(commentsVal);
-        tasksKeys.forEach((id) => {
-          reviews.push({
-            id,
-            ...commentVal[id]
-          });
-        });
-        console.log(reviews);
-        dispatch(addComments(reviews))
-      })
-  }
-};
+//     return ratingRef.then(() => {
+//       dispatch(addRating({
+//         ...rating,
+//         id: ratingRef.value
+//       }))
+//     })
+//   }
+// };
+
+
+
+
+
+
+// export const addReviews = (commentVal) => {
+//   return (dispatch, getState) => {
+//     const taskRef = firebaseRef.database().ref(`tasks/${id}`);
+//     const {id} = taskRef.key
+    
+//     const placeId = firebaseRef.database().ref(`tasks/${id}`);
+
+//     const createdAt = moment().unix();
+//     const formatedDate = moment.unix(createdAt).format('DDDD, MMMM, YYYY');
+//     const review =
+//       {
+//         ...commentVal,
+//         formatedDate
+//        };
+
+//     const commentRef = firebaseRef.database().ref(`${placeId}/review`).push(review);
+//     return commentRef.then(() => {
+//       dispatch(addComment({
+//         ...review,
+//         id: taskRef.key
+//       }))
+//     })
+//   }
+// };
+
+
+// export const startGetReviews = () => {
+//   return (dispatch, getState) => {
+//     const userId = firebaseRef.auth().currentUser.uid;
+//     const placeId = firebaseRef.database().ref(`tasks/${id}`);
+
+//       const commentRef = firebaseRef.database().ref(`users/${placeId}/review`);
+//       return commentRef.once('value').then((snapshot) => {
+//         const commentsVal = snapshot.val() || {};
+//         let reviews = [];
+//         const commentKeys = Object.keys(commentsVal);
+//         commentKeys.forEach((id) => {
+//           reviews.push({
+//             id,
+//             ...commentVal[id]
+//           });
+//         });
+//         console.log(reviews);
+//         dispatch(addComments(reviews))
+//       })
+//   }
+// };
 
 export const startAddTask = (taskVal) => {
   return (dispatch, getState) => {
@@ -76,7 +87,7 @@ export const startAddTask = (taskVal) => {
         completedAt: null,
         formatedDate
        };
-    const taskRef = firebaseRef.child('tasks').push(task);
+    const taskRef = firebaseRef.database().ref('tasks').push(task);
     return taskRef.then(() => {
       dispatch(addTask({
         ...task,
@@ -88,7 +99,7 @@ export const startAddTask = (taskVal) => {
 
 export const startGetTasks = () => {
   return (dispatch, getState) => {
-      const taskRef = firebaseRef.child('tasks');
+      const taskRef = firebaseRef.database().ref('tasks');
       return taskRef.once('value').then((snapshot) => {
         const tasksVal = snapshot.val() || {};
         let tasks = [];
@@ -110,7 +121,7 @@ export const startGetTasks = () => {
 
 export const show = (id) => {
     return (dispatch, getState) =>{
-        const showRef = firebaseRef.child('tasks/${id}');
+        const showRef = firebaseRef.database().ref(`tasks/${id}`);
         return showRef.once('value')
     }
 }
@@ -118,7 +129,7 @@ export const show = (id) => {
 
 export const commentShow = (id) => {
     return (dispatch, getState) =>{
-        const commentRef = firebaseRef.child('reviews/${id}');
+        const commentRef = firebaseRef.database().ref(`users/${userId}/review`);
         return commentRef.once('value')
     }
 }
@@ -136,7 +147,7 @@ export const startSort = (sort) => ({
 
 export const startEditTask = (task) => {
   return (dispatch, getState) => {
-    var taskRef = firebaseRef.child('tasks/${task.id}');
+    var taskRef = firebaseRef.database().ref('tasks/${task.id}');
 
     return taskRef.update(task).then(()=>{
       dispatch(editTask(task))
@@ -190,7 +201,7 @@ export const removeTask = (id) => {
 export const startRemovingTask = (id) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const taskRef = firebaseRef.child('tasks/${id}');
+    const taskRef = firebaseRef.database().ref('tasks/${id}');
     return taskRef.once('value').then((snapshot) => {
       const tasksVal = snapshot.val() || {};
       if(uid === tasksVal.uid) {
@@ -233,7 +244,7 @@ export const addTask = (task) => {
 }
 
 
-export const addComment = (task) => {
+export const addComment = (comment) => {
   return {
     type:'ADD_COMMENT',
     comment

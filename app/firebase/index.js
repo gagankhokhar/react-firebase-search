@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 
-try {
 	const config = {
 	  apiKey: "AIzaSyDkquHUnQ1l6rAPqG9UnTSXbgxKnOSbcCY",
 	  authDomain: "bachabox-react.firebaseapp.com",
@@ -11,12 +10,11 @@ try {
 	};
 
 
-  firebase.initializeApp(config);
 
-} catch (e) {
 
-}
 
-export const firebaseRef = firebase.database().ref();
+export const firebaseRef = firebase.initializeApp(config);
+
+export const database = firebase.database();
 
 export default firebase;

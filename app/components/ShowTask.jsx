@@ -6,7 +6,7 @@ import {show} from 'actions'
 import {commentShow} from 'actions'
 import * as API from 'API'
 import * as actions from 'actions'
-import Rating from 'rating'
+import CommentBox from '../reviews/CommentBox';
 
 class ShowTask extends Component {
   constructor (props) {
@@ -15,12 +15,13 @@ class ShowTask extends Component {
       name: '',
       location: '',
       description: '',
+      parentNotes: '',
+      kidsmenu: '',
       id: 0,
       info: '',
       city: '',
       category: '',
       email: '',
-      rating: 0,
       comment: '',
       reviews: [
           {content: 'This is a test review'},
@@ -28,12 +29,8 @@ class ShowTask extends Component {
       ],
       commentBeingTyped: ''
     };
-    this.setRating = this.setRating.bind(this);
   }
 
-  setRating(n) {
-      this.setState({rating: n});
-  }
 
   componentDidMount () {
     const {tickets} = this.props;
@@ -56,6 +53,8 @@ class ShowTask extends Component {
       name: res.name,
       location: res.location,
       description: res.description,
+      parentNotes: res.parentNotes,
+      kidsmenu: res.kidsmenu,
       id: res.id,
       info: res.info,
       city: res.city,
@@ -113,9 +112,9 @@ class ShowTask extends Component {
 
 
   render () {
-    const { rating } = this.state;
+
     const {comment} = this.state;
-    const {name, location, description, info, city, category, email, createdAt} = this.state;
+    const {name, location, description, kidsmenu, parentNotes, info, city, category, email, createdAt} = this.state;
     const date = moment.unix(createdAt).format('MMMM Do, YYYY @ k:mm ');
     const userEmail = email || 'Anonimus';
     return (
@@ -126,16 +125,13 @@ class ShowTask extends Component {
         <p><span className='colored-gray'>Location:</span> {city}, {location}</p>
         <p><span className='colored-gray'>Contact info:</span> {info}</p>
         <p><span className='colored-gray'>Description:</span> {description}</p>
+        <p><span className='colored-gray'>Information for Parents:</span> {parentNotes}</p>
+        <p><span className='colored-gray'>Kids menu:</span> {kidsmenu}</p>
 
         <div ref='map' className='map-show-task'>
           <p>Map will be here</p>
         </div>
 
-        <div ref='map' className='map-show-task'>
-          <p>Map will be here</p>
-        </div>
-
-        <Rating rating={this.state.rating} setRating={this.setRating} /> 
 
 
         <form ref='form' onSubmit={this.addNewComment.bind(this)}>
@@ -146,7 +142,10 @@ class ShowTask extends Component {
           <button type="submit" className="btn">Submit</button>
         </form>
 
-          
+        <h3>{this.state.user ? `Hello, ${this.state.user.displayName}!` : 'Please login!'}</h3>
+        <CommentBox user={this.state.user} />
+
+          <p><span className='colored-gray'>User Email:</span> {userEmail}</p>
           <p><span className='colored-gray'>Reviews:</span> {comment}</p>
       </div>
 

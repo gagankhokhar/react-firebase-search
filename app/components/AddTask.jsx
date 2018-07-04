@@ -59,15 +59,17 @@ class AddTask extends Component {
     const location = this.refs.location.value;
     const info = this.refs.info.value;
     const description = this.refs.description.value;
+    const parentNotes = this.refs.parentNotes.value;
     const city = this.refs.city.value;
     const category = this.refs.category.innerHTML;
+    const kidsmenu = this.inputkidsmenu.value;
     let latLng ={};
     let cityImg = '';
     const fulllocation = `${city}, ${location}`;
     //remove all special char
     const regExp = (/[^\w\s]/gi);
     const cityArr = city.split(regExp);
-    if (name && location && info && description && city) {
+    if (name && kidsmenu && location && info && description && parentNotes && city) {
     API.getPlace(cityArr[0]).then((res) => {
       if (res) {
         cityImg = res.photos[0].image.mobile;
@@ -84,7 +86,9 @@ class AddTask extends Component {
           name,
           location,
           info,
+          kidsmenu,
           description,
+          parentNotes,
           city: cityArr[0].trim(),
           category,
           latLng,
@@ -148,6 +152,7 @@ class AddTask extends Component {
         <h6>All fiels are required</h6>
           <form ref='form' onSubmit={this.addNewTask.bind(this)}>
             <div className='row'>
+                <h3 className="col-12">Description</h3>
               <div className='col-6'>
                 <div className="form-group">
                   <label>Name</label>
@@ -168,6 +173,10 @@ class AddTask extends Component {
                   <input onChange={this.handleGetCities.bind(this)} ref='city' type="text" className="form-control"  placeholder="Enter Store City name"/>
                     {renderList()}
                 </div>
+                <div className="form-group">
+                  <label>Description</label>
+                  <textarea ref='description' rows="5" className="form-control"  placeholder="Please describe this place in a factual and neutral tone."/>
+                </div>
               </div>
               <div className='col-6'>
                 <div className="form-group">
@@ -181,10 +190,24 @@ class AddTask extends Component {
               </div>
             </div>
 
-            <div className="form-group">
-              <label>Description</label>
-              <textarea ref='description' rows="5" className="form-control"  placeholder="Enter your description"/>
+            <div className='row'>
+                <div className='col-6'>
+                    <h3 className="col-12">Family Amenities</h3>
+                    <div className="form-group">
+                        <label>Do they have a kids menu?</label>
+                        <select className='form-control' id='city' ref={kidsmenu => this.inputkidsmenu = kidsmenu}>
+                            <option value='Yes'>Yes</option>
+                            <option value='No'>No</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Information for Parents</label>
+                      <textarea ref='parentNotes' rows="5" className="form-control"  placeholder="What should parents know about visiting this place with children?"/>
+                    </div>
+                </div>
             </div>
+
+            
             <button type="submit" className="btn">Submit</button>
           </form>
       </div>
