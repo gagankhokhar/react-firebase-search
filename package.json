@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start",
     "start": "npm run build && node server.js",
-    "build": "webpack"
+    "build": "webpack --watch"
   },
   "author": "gagan",
   "license": "ISC",
@@ -38,6 +38,7 @@
     "react-marked": "^0.3.1",
     "react-redux": "^5.0.5",
     "react-router": "^2.0.0",
+    "react-tabs": "^2.2.2",
     "redux": "^3.7.2",
     "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",

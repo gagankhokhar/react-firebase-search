@@ -3,6 +3,12 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import * as actions from 'actions'
 import * as API from 'API'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.scss'
+import ImageUploader from './ImageUploader/index'
+
+
+
 
 class AddTask extends Component {
 
@@ -10,7 +16,8 @@ class AddTask extends Component {
     super(props)
     this.state = {
       cities: [],
-      hidden: true
+      hidden: true,
+      tabIndex: 0
     }
   }
 
@@ -53,7 +60,7 @@ class AddTask extends Component {
 
   addNewTask (e) {
     e.preventDefault();
-    this.check();
+    // this.check();
     const {uid, email} = this.props.auth;
     const name = this.refs.name.value;
     const location = this.refs.location.value;
@@ -61,10 +68,14 @@ class AddTask extends Component {
     const description = this.refs.description.value;
     const city = this.refs.city.value;
     const category = this.refs.category.innerHTML;
-    const kidsmenu = this.inputkidsmenu.value;
-    const kidsmenuinput = this.refs.kidsmenuinput.value;
-    const nursinggreat = this.inputnursinggreat.value;
-    const nursinggreatInput = this.refs.nursinggreatInput.value;
+    const kids_menu = this.kids_menu_select.value;
+    const kids_menu_description = this.refs.kids_menu_description.value;
+    const nursing_great = this.nursing_great_select.value;
+    const nursing_great_description = this.refs.nursing_great_description.value;
+    const kids_eat_free = this.kids_eat_free_select.value;
+    const kids_eat_free_description = this.refs.kids_eat_free_description.value;
+    const parking = this.parking_select.value;
+    const parking_description = this.refs.parking_description.value;
     const parentnotes = this.refs.parentnotes.value;
     let latLng ={};
     let cityImg = '';
@@ -72,7 +83,7 @@ class AddTask extends Component {
     //remove all special char
     const regExp = (/[^\w\s]/gi);
     const cityArr = city.split(regExp);
-    if (name && category && kidsmenu && kidsmenuinput && nursinggreat && nursinggreatInput && location && info && description && parentnotes && city) {
+    if (name && location && city) {
     API.getPlace(cityArr[0]).then((res) => {
       if (res) {
         cityImg = res.photos[0].image.mobile;
@@ -89,11 +100,15 @@ class AddTask extends Component {
           name,
           location,
           info,
-          kidsmenu,
-          kidsmenuinput,
-          nursinggreat,
+          kids_menu,
+          kids_menu_description,
+          nursing_great,
+          nursing_great_description,
+          kids_eat_free,
+          kids_eat_free_description,
+          parking,
+          parking_description,
           description,
-          nursinggreatInput,
           parentnotes,
           city: cityArr[0].trim(),
           category,
@@ -129,6 +144,8 @@ class AddTask extends Component {
     }
   }
 
+
+
   render () {
 
     const predictions = this.state.cities.map((city) => {
@@ -153,77 +170,118 @@ class AddTask extends Component {
       }
     }
     return (
-      <div className='add-ticket'>
+      <div className='NewPlace'>
         <h3 className='action-title'>Add new Store</h3>
-          <form ref='form' onSubmit={this.addNewTask.bind(this)}>
-            <div className='row'>
-                <h3 className="col-12">Description</h3>
-              <div className='col-6'>
-                <div className="form-group">
-                  <label>Name</label>
-                  <input ref='name' type="text" className="form-control"  placeholder="Enter name of Store"/>
-                </div>
-                <div className="form-group">
-                  <label>Category</label>
-                  <div className='drop-wrap'>
-                    <div onClick={this.showList.bind(this)} ref='category' className="form-control category-list">
-                      Other
-                    </div>
-                    {renderCategoryList()}
-                  </div>
-                </div>
 
-                <div className="form-group">
-                  <label>Store City</label>
-                  <input onChange={this.handleGetCities.bind(this)} ref='city' type="text" className="form-control"  placeholder="Enter Store City name"/>
-                    {renderList()}
-                </div>
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea ref='description' rows="5" className="form-control"  placeholder="Please describe this place in a factual and neutral tone."/>
-                </div>
-                <div className="form-group">
-                  <label>Information for Parents</label>
-                  <textarea ref='parentnotes' rows="5" className="form-control"  placeholder="What should parents know about visiting this place with children?"/>
-                </div>
-              </div>
-              <div className='col-6'>
-                <div className="form-group">
-                  <label>Store Location</label>
-                  <input ref='location' type="text" className="form-control"  placeholder="Enter location of your store"/>
-                </div>
-                <div className="form-group">
-                  <label>Store Contact info</label>
-                  <input ref='info' type="text" className="form-control"  placeholder="Enter your Store Contact info"/>
-                </div>
-              </div>
-            </div>
+                
+                <Tabs defaultIndex={1} onSelect={index => console.log(index)}>
+                  <TabList>
+                    <Tab>About</Tab>
+                    <Tab>Photos</Tab>
+                    <Tab>Location</Tab>
+                  </TabList>
+                  <TabPanel>
+                    <h3>Description</h3>
+                      <form ref='form' onSubmit={this.addNewTask.bind(this)}>
+                        <div className='row'>
+                          <div className='col-6'>
+                            <div className="form-group">
+                              <label>Name</label>
+                              <input ref='name' type="text" className="form-control"  placeholder="Enter name of Store"/>
+                            </div>
+                            <div className="form-group">
+                              <label>Category</label>
+                              <div className='drop-wrap'>
+                                <div onClick={this.showList.bind(this)} ref='category' className="form-control category-list">
+                                  Other
+                                </div>
+                                {renderCategoryList()}
+                              </div>
+                            </div>
 
-            <div className='row'>
-                <div className='col-6'>
-                    <h3 className="col-12">Family Amenities</h3>
-                    <div className="form-group">
-                        <label>Are there comfortable seats where you could feed/nurse a baby?</label>
-                        <select className='form-control' ref={nursinggreat => this.inputnursinggreat = nursinggreat}>
-                            <option value='yes'>yes</option>
-                            <option value='no'>no</option>
-                        </select>
-                        <textarea ref='nursinggreatInput' rows="1" className="form-control mt-2"  placeholder="Add an optional note..."/>
-                    </div>
-                    <div className="form-group">
-                        <label>Do they have a kids menu?</label>
-                        <select className='form-control' ref={kidsmenu => this.inputkidsmenu = kidsmenu}>
-                            <option value='yes'>yes</option>
-                            <option value='no'>no</option>
-                        </select>
-                        <textarea ref='kidsmenuinput' rows="1" className="form-control mt-2"  placeholder="Add an optional note..."/>
-                    </div>
-                </div>
-            </div>
+                            <div className="form-group">
+                              <label>Store City</label>
+                              <input onChange={this.handleGetCities.bind(this)} ref='city' type="text" className="form-control"  placeholder="Enter Store City name"/>
+                                {renderList()}
+                            </div>
+                            <div className="form-group">
+                              <label>Description</label>
+                              <textarea ref='description' rows="5" className="form-control"  placeholder="Please describe this place in a factual and neutral tone."/>
+                            </div>
+                            <div className="form-group">
+                              <label>Information for Parents</label>
+                              <textarea ref='parentnotes' rows="5" className="form-control"  placeholder="What should parents know about visiting this place with children?"/>
+                            </div>
+                          </div>
+                          <div className='col-6'>
+                            <div className="form-group">
+                              <label>Store Location</label>
+                              <input ref='location' type="text" className="form-control"  placeholder="Enter location of your store"/>
+                            </div>
+                            <div className="form-group">
+                              <label>Store Contact info</label>
+                              <input ref='info' type="text" className="form-control"  placeholder="Enter your Store Contact info"/>
+                            </div>
+                          </div>
+                        </div>
 
-            
-            <button type="submit" className="btn">Submit</button>
-          </form>
+                        <div className='row'>
+                            <fieldset className='col-6'>
+                                <h5 className='NewPlace--heading'>Family Amenities</h5>
+                                <div className="form-group">
+                                    <h6>Are there comfortable seats where you could feed/nurse a baby?</h6>
+                                    <select className='form-control' ref={nursing_great => this.nursing_great_select = nursing_great}>
+                                        <option value='yes'>yes</option>
+                                        <option value='no'>no</option>
+                                    </select>
+                                    <textarea ref='nursing_great_description' rows="1" className="form-control mt-1"  placeholder="Add an optional note..."/>
+                                </div>
+                                <div className="form-group">
+                                    <h6>Do they have a kids menu?</h6>
+                                    <select className='form-control' ref={kids_menu => this.kids_menu_select = kids_menu}>
+                                        <option value='yes'>yes</option>
+                                        <option value='no'>no</option>
+                                    </select>
+                                    <textarea ref='kids_menu_description' rows="1" className="form-control mt-1"  placeholder="Add an optional note..."/>
+                                </div>
+                                <div className="form-group">
+                                    <h6>Do kids eat free?</h6>
+                                    <select className='form-control' ref={kids_eat_free => this.kids_eat_free_select = kids_eat_free}>
+                                        <option value='yes'>yes</option>
+                                        <option value='no'>no</option>
+                                    </select>
+                                    <textarea ref='kids_eat_free_description' rows="1" className="form-control mt-1"  placeholder="Add an optional note..."/>
+                                </div>
+                                <div className="form-group">
+                                    <h6>Is there plenty of parking available?</h6>
+                                    <select className='form-control' ref={parking => this.parking_select = parking}>
+                                        <option value='yes'>yes</option>
+                                        <option value='no'>no</option>
+                                    </select>
+                                    <textarea ref='parking_description' rows="1" className="form-control mt-1"  placeholder="Add an optional note..."/>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        
+                        <button type="submit" className="btn">Submit</button>
+                      </form>
+                  </TabPanel>
+                  <TabPanel>
+                    <section className="photos">
+                        <div>
+                            <h3>Photos</h3>
+                        </div>
+                        <div className="photos">
+
+                                <ImageUploader />
+                        </div>
+                    </section>
+                  </TabPanel>
+                  <TabPanel></TabPanel>
+                </Tabs>
+
+          
       </div>
     )
   }

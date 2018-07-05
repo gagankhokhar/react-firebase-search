@@ -5,7 +5,7 @@ import firebase from 'firebase'
 	  authDomain: "bachabox-react.firebaseapp.com",
 	  databaseURL: "https://bachabox-react.firebaseio.com",
 	  projectId: "bachabox-react",
-	  storageBucket: "",
+	  storageBucket: "bachabox-react.appspot.com",
 	  messagingSenderId: "656356891320"
 	};
 

@@ -1,0 +1,89 @@
+.NewPlace{
+	
+	&--heading{
+		margin-bottom: 25px;
+		margin-top: 20px;
+	}
+	fieldset{
+		.form-group{
+			margin-bottom: 20px;
+		}
+		.form-group{
+			textarea{
+				height: calc(2.25rem + 2px);
+				padding: .4rem .9rem !important;
+			}
+		}
+	}
+}	
+	section.photos{
+		position: relative;
+	}
+	section.photos > div {
+	    margin-bottom: 32px;
+	}
+	form.upload button{
+	    position: absolute;
+	    top: 10px;
+	    right: 0;
+	    padding: 0;
+	    line-height: 20px;
+	    color: $button-main;
+	}
+	form.upload{
+		width: 100%;
+		height: 100%;
+	}
+	form.upload label {
+	    width: 100%;
+	    height: 100%;
+	    margin-bottom: 0;
+	    border: dashed 5px #d4d6d8;
+	    border-radius: 3px;
+	    padding: 32px;
+	    text-align: center;
+	    cursor: pointer;
+	}
+	form.upload input[type=file] {
+	    display: none;
+	}
+	form.upload span {
+	    display: block;
+	    width: 62px;
+	    height: 62px;
+	    margin: 0 auto 10px;
+	    border-radius: 50%;
+	    background-color: #afb5bc;
+	    font-size: 62px;
+	    line-height: 58px;
+	    font-weight: bold;
+	    color: #fff;
+	}
+	form.upload label:after {
+	    content: "Add Photo";
+	    display: block;
+	    font-size: 18px;
+	    font-weight: bold;
+	    color: #929ba3;
+	}
+	section.photos{
+		position: relative;
+	}
+	ul.photos{
+		list-style: none;
+		padding: 0;
+	}
+	ul.photos > li {
+	    display: inline-block;
+	    width: 224px;
+	    height: 168px;
+	    margin: 0 8px 16px;
+	    font-size: 16px;
+	    color: #929ba3;
+	    text-align: center;
+	    vertical-align: top;
+	    overflow: hidden;
+	}
+	ul.photos > li img{
+		height: 100%;
+	}

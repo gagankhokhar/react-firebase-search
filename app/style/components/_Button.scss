@@ -16,3 +16,16 @@
 .edit {
     background-color: $blue-gray;
 }
+button{
+  outline: 0;
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  white-space: nowrap;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
