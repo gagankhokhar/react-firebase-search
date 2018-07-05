@@ -23,8 +23,6 @@ export const ticketsReducer = (state=[], action) => {
           info: action.task.info,
           description: action.task.description,
           city: action.task.city,
-          completed: action.task.completed,
-          completedAt: action.task.completedAt,
           category: action.task.category
         }
       }
@@ -77,7 +75,6 @@ export const loaderReducer = (state=true, action) => {
 const filterByState = {
   city:[{key:'city', property:'All'}],
   formatedDate:[{key:'formatedDate', property:'All'}],
-  completed:[{key:'completed', property:'All'}],
   category:[{key:'category', property:'All'}]
 };
 export const filterByReducer = (state=filterByState, action) => {

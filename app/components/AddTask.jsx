@@ -59,17 +59,20 @@ class AddTask extends Component {
     const location = this.refs.location.value;
     const info = this.refs.info.value;
     const description = this.refs.description.value;
-    const parentNotes = this.refs.parentNotes.value;
     const city = this.refs.city.value;
     const category = this.refs.category.innerHTML;
     const kidsmenu = this.inputkidsmenu.value;
+    const kidsmenuinput = this.refs.kidsmenuinput.value;
+    const nursinggreat = this.inputnursinggreat.value;
+    const nursinggreatInput = this.refs.nursinggreatInput.value;
+    const parentnotes = this.refs.parentnotes.value;
     let latLng ={};
     let cityImg = '';
     const fulllocation = `${city}, ${location}`;
     //remove all special char
     const regExp = (/[^\w\s]/gi);
     const cityArr = city.split(regExp);
-    if (name && kidsmenu && location && info && description && parentNotes && city) {
+    if (name && category && kidsmenu && kidsmenuinput && nursinggreat && nursinggreatInput && location && info && description && parentnotes && city) {
     API.getPlace(cityArr[0]).then((res) => {
       if (res) {
         cityImg = res.photos[0].image.mobile;
@@ -87,8 +90,11 @@ class AddTask extends Component {
           location,
           info,
           kidsmenu,
+          kidsmenuinput,
+          nursinggreat,
           description,
-          parentNotes,
+          nursinggreatInput,
+          parentnotes,
           city: cityArr[0].trim(),
           category,
           latLng,
@@ -149,7 +155,6 @@ class AddTask extends Component {
     return (
       <div className='add-ticket'>
         <h3 className='action-title'>Add new Store</h3>
-        <h6>All fiels are required</h6>
           <form ref='form' onSubmit={this.addNewTask.bind(this)}>
             <div className='row'>
                 <h3 className="col-12">Description</h3>
@@ -177,6 +182,10 @@ class AddTask extends Component {
                   <label>Description</label>
                   <textarea ref='description' rows="5" className="form-control"  placeholder="Please describe this place in a factual and neutral tone."/>
                 </div>
+                <div className="form-group">
+                  <label>Information for Parents</label>
+                  <textarea ref='parentnotes' rows="5" className="form-control"  placeholder="What should parents know about visiting this place with children?"/>
+                </div>
               </div>
               <div className='col-6'>
                 <div className="form-group">
@@ -194,15 +203,20 @@ class AddTask extends Component {
                 <div className='col-6'>
                     <h3 className="col-12">Family Amenities</h3>
                     <div className="form-group">
-                        <label>Do they have a kids menu?</label>
-                        <select className='form-control' id='city' ref={kidsmenu => this.inputkidsmenu = kidsmenu}>
-                            <option value='Yes'>Yes</option>
-                            <option value='No'>No</option>
+                        <label>Are there comfortable seats where you could feed/nurse a baby?</label>
+                        <select className='form-control' ref={nursinggreat => this.inputnursinggreat = nursinggreat}>
+                            <option value='yes'>yes</option>
+                            <option value='no'>no</option>
                         </select>
+                        <textarea ref='nursinggreatInput' rows="1" className="form-control mt-2"  placeholder="Add an optional note..."/>
                     </div>
                     <div className="form-group">
-                      <label>Information for Parents</label>
-                      <textarea ref='parentNotes' rows="5" className="form-control"  placeholder="What should parents know about visiting this place with children?"/>
+                        <label>Do they have a kids menu?</label>
+                        <select className='form-control' ref={kidsmenu => this.inputkidsmenu = kidsmenu}>
+                            <option value='yes'>yes</option>
+                            <option value='no'>no</option>
+                        </select>
+                        <textarea ref='kidsmenuinput' rows="1" className="form-control mt-2"  placeholder="Add an optional note..."/>
                     </div>
                 </div>
             </div>

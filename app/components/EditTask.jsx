@@ -14,7 +14,6 @@ class EditTask extends Component {
       id: 0,
       info: '',
       city: '',
-      completed: '',
       hidden: true
     }
   }
@@ -51,8 +50,7 @@ class EditTask extends Component {
       location: this.state.location,
       description: this.state.description,
       info: this.state.info,
-      city: this.state.city,
-      completed: this.state.completed
+      city: this.state.city
 
     };
     
@@ -83,8 +81,7 @@ class EditTask extends Component {
       description: current.description,
       id: current.id,
       info: current.info,
-      city: current.city,
-      completed: current.completed
+      city: current.city
     })
   }
 

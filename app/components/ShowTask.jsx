@@ -15,19 +15,16 @@ class ShowTask extends Component {
       name: '',
       location: '',
       description: '',
-      parentNotes: '',
+      parentnotes: '',
       kidsmenu: '',
+      kidsmenuinput: '',
+      nursinggreat: '',
+      nursinggreatInput: '',
       id: 0,
       info: '',
       city: '',
       category: '',
-      email: '',
-      comment: '',
-      reviews: [
-          {content: 'This is a test review'},
-          {content: 'Oh hai, world!'}
-      ],
-      commentBeingTyped: ''
+      email: ''
     };
   }
 
@@ -53,8 +50,11 @@ class ShowTask extends Component {
       name: res.name,
       location: res.location,
       description: res.description,
-      parentNotes: res.parentNotes,
+      parentnotes: res.parentnotes,
       kidsmenu: res.kidsmenu,
+      kidsmenu: res.kidsmenuinput,
+      nursinggreat: res.nursinggreat,
+      nursinggreatInput: res.nursinggreatInput,
       id: res.id,
       info: res.info,
       city: res.city,
@@ -81,52 +81,65 @@ class ShowTask extends Component {
     });
   }
 
-  check () {
-      const refsKeys = Object.keys(this.refs);
-        refsKeys.forEach((key) => {
-        const node = document.createElement('LABEL');
-        node.classList.add('warning-lable');
-        const textNode = document.createTextNode('This field can\'t be empty!');
-        node.appendChild(textNode);
+  // check () {
+  //     const refsKeys = Object.keys(this.refs);
+  //       refsKeys.forEach((key) => {
+  //       const node = document.createElement('LABEL');
+  //       node.classList.add('warning-lable');
+  //       const textNode = document.createTextNode('This field can\'t be empty!');
+  //       node.appendChild(textNode);
          
-        if (!this.refs[key].value && key !== 'form' && key !== 'comment') {
-          this.refs[key].parentElement.appendChild(node);
-        }
+  //       if (!this.refs[key].value && key !== 'form' && key !== 'comment') {
+  //         this.refs[key].parentElement.appendChild(node);
+  //       }
          
-      });
-    }
+  //     });
+  //   }
 
 
 
-  addNewComment (e) {
-    e.preventDefault();
-    this.check();
-    const comment = this.refs.comment.value;
+  // addNewComment (e) {
+  //   e.preventDefault();
+  //   this.check();
+  //   const comment = this.refs.comment.value;
 
-    const review = {
-      comment
-    };
-    this.props.dispatch(actions.addReviews(review));
-    this.refs.form.reset();
-  }
+  //   const review = {
+  //     comment
+  //   };
+  //   this.props.dispatch(actions.addReviews(review));
+  //   this.refs.form.reset();
+  // }
 
 
   render () {
 
-    const {comment} = this.state;
-    const {name, location, description, kidsmenu, parentNotes, info, city, category, email, createdAt} = this.state;
+
+    const {name, location, description, kidsmenu, kidsmenuinput, nursinggreat, nursinggreatInput, parentnotes, info, city, category, email, createdAt} = this.state;
     const date = moment.unix(createdAt).format('MMMM Do, YYYY @ k:mm ');
     const userEmail = email || 'Anonimus';
     return (
-      <div className='current-task'>
+      <div className='current-task col-7'>
         <h3>{name}</h3>
-        <p><span className='colored-gray'>Category:</span> {category}</p>
-        <p><span className='colored-gray'>Created at:</span> {date}</p>
-        <p><span className='colored-gray'>Location:</span> {city}, {location}</p>
-        <p><span className='colored-gray'>Contact info:</span> {info}</p>
-        <p><span className='colored-gray'>Description:</span> {description}</p>
-        <p><span className='colored-gray'>Information for Parents:</span> {parentNotes}</p>
-        <p><span className='colored-gray'>Kids menu:</span> {kidsmenu}</p>
+        <div>
+          <p><span className='colored-gray'>Category:</span> {category}</p>
+          <p><span className='colored-gray'>Created at:</span> {date}</p>
+          <p><span className='colored-gray'>Location:</span> {city}, {location}</p>
+          <p><span className='colored-gray'>Contact info:</span> {info}</p>
+          <p><span className='colored-gray'>Description:</span> {description}</p>
+          <p><span className='colored-gray'>Information for Parents:</span> {parentnotes}</p>
+        </div>
+        <hr/>
+        <ul className='place_guide'>
+          <h4>Family Amenities</h4>
+          <li className='place_guide__info'>
+            <p><span className='colored-gray'>Good for Nursing:</span> {nursinggreat}</p>
+            <p>{nursinggreatInput}</p>
+          </li>
+          <li>
+            <p><span className='colored-gray'>Kids menu:</span> {kidsmenu}</p>
+            <p>{kidsmenuinput}</p>
+          </li>
+        </ul>
 
         <div ref='map' className='map-show-task'>
           <p>Map will be here</p>
@@ -134,19 +147,7 @@ class ShowTask extends Component {
 
 
 
-        <form ref='form' onSubmit={this.addNewComment.bind(this)}>
-          <div className="form-group">
-            <label>Description</label>
-            <textarea ref='comment' rows="5" className="form-control"  placeholder="Enter your comment"/>
-          </div>
-          <button type="submit" className="btn">Submit</button>
-        </form>
-
-        <h3>{this.state.user ? `Hello, ${this.state.user.displayName}!` : 'Please login!'}</h3>
-        <CommentBox user={this.state.user} />
-
-          <p><span className='colored-gray'>User Email:</span> {userEmail}</p>
-          <p><span className='colored-gray'>Reviews:</span> {comment}</p>
+        
       </div>
 
     )

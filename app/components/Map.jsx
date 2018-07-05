@@ -81,7 +81,6 @@ class Map extends Component {
        filterBy.city,
          filterBy.category,
            filterBy.formatedDate,
-             filterBy.completed,
              'id');
 
 //removw timeout and raplace it with callback

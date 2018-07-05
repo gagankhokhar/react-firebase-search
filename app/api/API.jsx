@@ -62,10 +62,9 @@ const filterBy = (tasks) => {
 
 
 
-export const composeFilter = (tasks, searchText, city, category, formatedDate,  completed, sortVal) => {
+export const composeFilter = (tasks, searchText, city, category, formatedDate, sortVal) => {
   let rerender = searchTasks(tasks, searchText);
   rerender = sortArr(rerender, sortVal);
-  rerender = filterBy(rerender)(completed);
   rerender = filterBy(rerender)(formatedDate);
   rerender = filterBy(rerender)(category);
   rerender = filterBy(rerender)(city);

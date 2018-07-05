@@ -23,7 +23,7 @@ class TaskList extends Component {
 
   render () {
     const {tickets, search, filterBy, loader, sort} = this.props;
-    const filteredList = API.composeFilter(tickets, search, filterBy.city, filterBy.category, filterBy.formatedDate, filterBy.completed, sort);
+    const filteredList = API.composeFilter(tickets, search, filterBy.city, filterBy.category, filterBy.formatedDate, sort);
     let arr = [];
      const {limit} = this.state;
      filteredList.forEach((ticket, index) => {

@@ -1,0 +1,37 @@
+[debug] [2018-07-05T04:07:05.255Z] ----------------------------------------------------------------------
+[debug] [2018-07-05T04:07:05.261Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-07-05T04:07:05.263Z] CLI Version:   3.16.0
+[debug] [2018-07-05T04:07:05.263Z] Platform:      darwin
+[debug] [2018-07-05T04:07:05.263Z] Node Version:  v8.9.3
+[debug] [2018-07-05T04:07:05.263Z] Time:          Thu Jul 05 2018 09:37:05 GMT+0530 (IST)
+[debug] [2018-07-05T04:07:05.263Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-07-05T04:07:05.292Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-07-05T04:07:05.293Z] > authorizing via signed-in user
+[debug] [2018-07-05T04:07:05.295Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bachabox-react  
+  
+ Thu Jul 05 2018 09:37:05 GMT+0530 (IST)
+[debug] [2018-07-05T04:07:07.209Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-05T04:07:07.212Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bachabox-react/tokens  
+  
+ Thu Jul 05 2018 09:37:07 GMT+0530 (IST)
+[debug] [2018-07-05T04:07:08.460Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'bachabox-react'...
+[info] 
+[info] i  deploying database, storage, hosting
+[info] i  database: checking rules syntax...
+[debug] [2018-07-05T04:07:10.310Z] >>> HTTP REQUEST PUT https://bachabox-react.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}
+ 
+ Thu Jul 05 2018 09:37:10 GMT+0530 (IST)
+[debug] [2018-07-05T04:07:11.707Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database bachabox-react is valid
+[debug] [2018-07-05T04:07:11.710Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bachabox-react  
+  
+ Thu Jul 05 2018 09:37:11 GMT+0530 (IST)

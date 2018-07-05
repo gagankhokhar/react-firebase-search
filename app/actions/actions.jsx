@@ -82,9 +82,7 @@ export const startAddTask = (taskVal) => {
     const task =
       {
         ...taskVal,
-        completed: 'Not completed',
         createdAt,
-        completedAt: null,
         formatedDate
        };
     const taskRef = firebaseRef.database().ref('tasks').push(task);
@@ -110,7 +108,7 @@ export const startGetTasks = () => {
             ...tasksVal[id]
           });
         });
-        console.log(tasks);
+        // console.log(tasks);
         dispatch(addTasks(tasks))
       })
   }
@@ -201,7 +199,7 @@ export const removeTask = (id) => {
 export const startRemovingTask = (id) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const taskRef = firebaseRef.database().ref('tasks/${id}');
+    const taskRef = firebaseRef.database().ref(`tasks/${id}`);
     return taskRef.once('value').then((snapshot) => {
       const tasksVal = snapshot.val() || {};
       if(uid === tasksVal.uid) {

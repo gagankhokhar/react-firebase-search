@@ -18,7 +18,6 @@ class Sort extends Component {
     return (
       <div ref='sort' onClick={this.handleSort.bind(this)} className='sort'>
         <a id='active-sort' data-sort='createdAt'>Created at</a>
-        <a data-sort='completed'>Completed</a>
         <a data-sort='name'>Task`s name</a>
         <a data-sort='city'>City</a>
       </div>
