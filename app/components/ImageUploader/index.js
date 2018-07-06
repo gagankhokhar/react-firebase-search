@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase, {firebaseRef} from '../..//firebase/index'
+import {firebaseRef} from '../../firebase/index'
 
 export default class ImageUploader extends Component {
   constructor(props) {
@@ -26,17 +26,17 @@ export default class ImageUploader extends Component {
     const uploadTask = storageRef
       .child(`place/${this.state.file.name}`)
       .put(this.state.file);
+    
     uploadTask.on(
       'state_changed',
       (snapshot) => {
         console.log(snapshot);
       },
       (error) => {
-        console.log('handleUpload error');
         console.log(error);
       },
-      (success) => {
-        console.log(uploadTask.snapshot);
+      () => {
+        // final url of the image
         console.log(uploadTask.snapshot.downloadURL);
       },
     );
@@ -57,8 +57,8 @@ export default class ImageUploader extends Component {
                     />
                   <span>+</span>
               </label>
-              <button onClick={this.handleUpload}>Upload</button>
           </form>
+          <button onClick={this.handleUpload}>Upload</button>
         </li>
         <li className="photo">
           {this.state.imagePreview && <img src={this.state.imagePreview} />}
