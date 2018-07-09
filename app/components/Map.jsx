@@ -119,7 +119,7 @@ class Map extends Component {
 
   }
 
-  getNearTasks (near) {
+  getNearPlaces (near) {
     this.setState({
        near
     }, () => {
@@ -166,7 +166,6 @@ class Map extends Component {
   render () {
     return (
     <div className='map-wrap'>
-      <MapControls passNear={this.getNearTasks.bind(this)}/>
       <div className='map-buttons-wrap'>
           <button onClick={this.hideMarkers.bind(this)} className='btn edit'>Hide markers</button>
           <button onClick={this.showMarkers.bind(this)} className='btn'>Show markers</button>

@@ -1,0 +1,175 @@
+.current-place{
+  h3{
+    text-transform: uppercase;
+    color: $button-main;
+  }
+  .colored-gray{
+    color: #abaaaa;
+  }
+}
+
+.place{
+	.meta{
+
+	}
+	&__title{
+
+	}
+	&__description{
+
+
+	}
+	&__images{
+		li{
+			display: inline-block;
+			width: 220px;
+			margin: 0 8px 10px 0;
+			vertical-align: top;
+			img{
+				width: 100%;
+			}
+		}
+	}
+	&__guide{
+		padding: 0;
+		list-style: none;
+
+		&__item{
+
+			margin-top: 15px;
+			h5{
+				font-size: 18px;
+				margin-bottom: 0;
+			}
+			p{
+				font-size: 14px;
+			}
+			.fa{
+				background-color: $button-main;
+				float: left;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				padding: 3px;
+				font-size: 12px;
+				color: #fff;
+				text-align: center;
+				margin-top: 2px;
+				& + div{
+					min-height: 18px;
+					margin-left: 26px;
+				}
+			}
+		}
+	}
+	&__sidebar{
+		p{
+			margin-bottom: 0;
+		}
+		&__item{
+
+			margin-bottom: 20px;
+			list-style-type: none;
+			&--title{
+
+
+			}
+		}
+	}
+
+	&__reviews{
+
+	}
+}
+
+.map-show-place{
+  height: 200px;
+  width: 100%;
+}
+
+
+.place__reviews{
+	.form-group{
+		margin-bottom: 20px;
+		border-radius: 3px;
+		box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, .18);
+		padding: 14px;
+		background-color: #f5f5f5;
+	}
+}
+.review{
+
+	margin-bottom: 20px;
+	border-radius: 3px;
+	padding: 14px;
+	background-color: #f5f5f5;
+	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, .18);
+	&--description{
+
+	}
+	&--actions{
+		padding: 0;
+		display: flex;
+		font-size: 14px;
+		color: #929ba3;
+		> li{
+			display: inline-block;
+			margin-right: 12px;
+			white-space: nowrap;
+		}
+		li{
+			&.save{
+				flex-grow: 1;
+			    text-align: right;
+			}
+			&:last-child{
+				margin-right: 0;
+			}
+		}
+		a{
+			padding: 0;
+			color: inherit;
+			.fa{
+				top: 2px;
+		    	margin-right: 4px;
+			}
+		}
+	}
+
+	.avatar{
+		float: left;
+		width: 30px;
+		height: 30px;
+	    border-radius: 50%;
+	    & + div{
+	    	margin-bottom: 12px;
+	    	margin-right: 20px;
+	    	padding-top: 5px;
+	    	margin-left: 40px;
+	    	line-height: 20px;
+	    	.name{
+	    		margin-right: 8px;
+	    		font-size: 16px;
+	    		font-weight: bold;
+	    		color: #2a2c2e;
+	    	}
+	    }
+	}
+	.rating{
+		font-size: 22px;
+		line-height: 1;
+		color: #ffa72e;
+	}
+}
+
+.meta{
+	font-size: 14px;
+	color: #929ba3;
+}
+
+
+
+
+
+
+

@@ -1,6 +1,59 @@
 .navbar-brand {
-    color: $button-main;
-    &:hover{
-       color: $button-main; 
-    }
+    color: $white;
+}
+
+.sitenav{
+	ul{
+		list-style: none;
+	}
+}
+
+.main-header{
+	nav{
+		background-color: $brand-blue;
+	}
+}
+
+.search-field {
+	// background-color: $white;
+	padding-left: 10px;
+	width: 340px;
+	display: flex;
+	position: relative;
+	padding-bottom: 25px;
+	input{
+		border: none;
+		&:focus{
+		 	border: none !important;
+		}
+  }
+}
+
+#focused{
+	border-color: $button-main;
+}
+
+.nav-filter{
+	padding-bottom: 25px;
+}
+
+.filters-list{
+	position: absolute;
+    top: 40px;
+    width: 100%;
+	margin-bottom: 0;
+	li{
+		display: inline-block;
+		a{
+			color: #fff !important;
+			.cross{
+				cursor:pointer;
+				padding-left: 7px;
+				padding-right: 7px;
+				&:hover{
+					color: $button-main;
+				}
+      		}
+    	}
+  	}
 }

@@ -1,16 +1,13 @@
 .btn {
   background-color: $button-main;
   color: $button-font;
-  cursor: pointer;
-  border-radius: 3px !important;
-  font-size: 1rem !important;
-  padding: .6rem .9rem !important;
   &:hover{
     color: $button-font;
   }
   &:focus {
     box-shadow: none !important;
   }
+
 }
 
 .edit {
@@ -22,7 +19,6 @@ button{
   background-color: transparent;
   background-image: none;
   white-space: nowrap;
-  touch-action: manipulation;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

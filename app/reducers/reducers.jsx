@@ -1,29 +1,29 @@
 export const ticketsReducer = (state=[], action) => {
   switch (action.type) {
-    case 'ADD_TASK':
-      return [...state, action.task];
-    case 'ADD_TASKS':
-      return action.tasks;
-    case 'REMOVE_TASK':
+    case 'ADD_PLACE':
+      return [...state, action.place];
+    case 'ADD_PLACES':
+      return action.places;
+    case 'REMOVE_PLACE':
     const removedFromArr = state.filter((item)=>{
       if(action.id !== item.id) {
         return item
       }
     })
       return removedFromArr;
-    case 'EDIT_TASK':
-    const editedArr = state.map((task) => {
-      if(task.id != action.task.id){
-        return task;
+    case 'EDIT_PLACE':
+    const editedArr = state.map((place) => {
+      if(place.id != action.place.id){
+        return place;
       } else {
         return {
-          ...task,
-          name: action.task.name,
-          location: action.task.location,
-          info: action.task.info,
-          description: action.task.description,
-          city: action.task.city,
-          category: action.task.category
+          ...place,
+          name: action.place.name,
+          location: action.place.location,
+          info: action.place.info,
+          description: action.place.description,
+          city: action.place.city,
+          category: action.place.category
         }
       }
     })

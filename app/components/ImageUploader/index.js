@@ -5,6 +5,8 @@ export default class ImageUploader extends Component {
   constructor(props) {
     super(props);
     this.state = { file: '', imagePreview: '' };
+    console.log('imageuploader');
+    console.log(this.props.image_field);
 
     this.handlePreview = this.handlePreview.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
@@ -22,8 +24,8 @@ export default class ImageUploader extends Component {
   }
 
   handleUpload() {
-    const storageRef = firebaseRef.storage().ref();
-    const uploadTask = storageRef
+
+    const uploadTask = firebaseRef.storage().ref()
       .child(`place/${this.state.file.name}`)
       .put(this.state.file);
     
@@ -38,6 +40,9 @@ export default class ImageUploader extends Component {
       () => {
         // final url of the image
         console.log(uploadTask.snapshot.downloadURL);
+        // this.refs.images.value = uploadTask.snapshot.downloadURL;
+       this.refs.images.value = uploadTask.snapshot.downloadURL;
+
       },
     );
   }
@@ -46,8 +51,9 @@ export default class ImageUploader extends Component {
     return (
       <ul className="photos">
         <li>
-          <form className="upload">
+          <div className="upload">
               <label>
+              <input type="hidden" ref="images" name="store_images" />
                   <input
                       placeholder="ImageUpload"
                       type="file"
@@ -57,15 +63,14 @@ export default class ImageUploader extends Component {
                     />
                   <span>+</span>
               </label>
-          </form>
-          <button onClick={this.handleUpload}>Upload</button>
+          </div>
+          <span onClick={this.handleUpload}>Upload</span>
         </li>
         <li className="photo">
           {this.state.imagePreview && <img src={this.state.imagePreview} />}
         </li>
         <li className="photo">
         </li>
-
       </ul>
     );
   }

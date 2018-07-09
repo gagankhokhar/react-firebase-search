@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import UsersTasks from 'UsersTasks'
+import UsersPlaces from 'UsersPlaces'
 import {startLogout} from 'actions'
 
 class User extends Component {
@@ -20,8 +20,8 @@ class User extends Component {
       <div className='user'>
         <h3 className='action-title'>{email}</h3>
         <button onClick={this.logout.bind(this)} className='btn'>Logout</button>
-        <p>You created {currentUserTickets.length} tasks</p>
-        <UsersTasks current = {currentUserTickets}/>
+        <p>You created {currentUserTickets.length} places</p>
+        <UsersPlaces current = {currentUserTickets}/>
       </div>
     )
   }

@@ -5,10 +5,8 @@ class SideBar extends Component {
   render () {
     return (
       <div className="col-2">
-          <div className="card">
-            <div className="card-header"><Link to='/'>Main</Link></div>
-            <div className="card-header"><Link to='map'>Map</Link></div>
-            <div className="card-header"><Link to='add'>Add</Link></div>
+          <div className="">
+            
           </div>
       </div>
     )

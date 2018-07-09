@@ -44,31 +44,27 @@ class ControlsBar extends Component{
 
           <ul className="navbar-nav mr-auto controls-list">
            
-            <li  className="nav-item date-hover">
+            <li  className="nav-item date-hover nav-filter">
               <a className="btn" href="#">City</a>
               <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
                 {arrCitiesWithoutDupe}
                 <p data-key='city'>All</p>
               </div>
             </li>
-            <li className="nav-item date-hover">
+            <li className="nav-item date-hover nav-filter">
               <a className="btn" href="#">Category</a>
                 <div onClick={this.handleFilter.bind(this)} className='date-dropdown'>
                   <p data-key='category'>Baby Products</p>
                   <p data-key='category'>Activities for Kids</p>
                   <p data-key='category'>Toys & Gifts</p>
-                  <p data-key='category'>DIY</p>
                   <p data-key='category'>All</p>
                 </div>
             </li>
           </ul>
 
-          <ul className="navbar-nav ml-auto controls-list">
-              <li><Link className="btn" to='add'>Add</Link></li>
-          </ul>
           <div ref='searchField' className='search-field'>
-            <ActiveFiltersList/>
             <input onBlur={this.removeId.bind(this)} onFocus={this.focusField.bind(this)} onChange={this.getSearchValue.bind(this)} ref='search' className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
+            <ActiveFiltersList/>
           </div>
 
       </nav>

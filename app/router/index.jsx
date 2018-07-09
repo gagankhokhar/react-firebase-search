@@ -4,12 +4,12 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router'
 import firebase from 'firebaseConf'
 
 import Main from 'Main'
-import TaskList from 'TaskList'
+import PlaceList from 'PlaceList'
 import Map from 'Map'
-import AddTask from 'AddTask'
+import AddPlace from 'AddPlace'
 import Person from 'Person'
-import ShowTask from 'ShowTask'
-import EditTask from 'EditTask'
+import ShowPlace from 'ShowPlace'
+import EditPlace from 'EditPlace'
 import User from 'User'
 import Registration from 'Registration'
 import Hoc from 'Hoc'
@@ -37,11 +37,11 @@ export default (
     <Route path='/' component={Main}>
       <Route onEnter={requireLogin} path='user' component={User}/>
       <Route path='map' component={Map}/>
-      <Route path='add' component={AddTask}/>
+      <Route path='add' component={AddPlace}/>
       <Route path='person' component={Person}/>
-      <Route path='task/:id' component={ShowTask}/>
-      <Route path='edit/:id' component={EditTask}/>
-      <IndexRoute  component={Hoc(TaskList, Preloader)}/>
+      <Route path='place/:id' component={ShowPlace}/>
+      <Route path='edit/:id' component={EditPlace}/>
+      <IndexRoute  component={Hoc(PlaceList, Preloader)}/>
     </Route>
     <Route onEnter={requireLogout} path='registration' component={Registration}/>
     <Route onEnter={requireLogout} path='login' component={Registration}/>

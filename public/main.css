@@ -18,8 +18,7 @@
     display: block; }
 
 .controls-list .btn {
-  margin-right: .5rem;
-  margin-bottom: .7rem; }
+  margin-right: .5rem; }
 
 .controls-list .date-hover .btn {
   background-color: #fff;
@@ -36,25 +35,34 @@
     border-right: .3em solid transparent;
     border-left: .3em solid transparent; }
 
-.task {
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+.place-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
+  align-items: center;
   transition: .5s;
   cursor: pointer; }
-  .task img {
-    height: 10rem;
-    width: 10rem;
+  .place-item img {
+    height: 160px;
+    min-width: 160px;
+    max-width: 160px;
     opacity: .5;
     object-fit: cover;
     filter: grayscale(100%); }
-  .task div {
-    padding-left: 0.7rem; }
-    .task div .colored {
+  .place-item div {
+    padding-left: 20px;
+    padding-right: 20px; }
+    .place-item div .colored {
       color: #ef9094; }
-    .task div h3 {
-      text-transform: uppercase; }
-  .task:hover {
+    .place-item div h3 {
+      color: #ef9094; }
+  .place-item__des {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .place-item:hover {
     background-color: #f1f1f1 !important; }
 
 .map {
@@ -65,24 +73,6 @@
   padding-bottom: .5rem; }
   .map-buttons-wrap button {
     margin-right: .5rem; }
-
-.filters-list {
-  display: inline-flex;
-  margin-bottom: 0; }
-  .filters-list li {
-    text-align: center;
-    min-width: 8rem;
-    line-height: 2.51;
-    text-transform: capitalize; }
-    .filters-list li a {
-      color: #848383 !important;
-      display: inline-flex; }
-      .filters-list li a .cross {
-        cursor: pointer;
-        padding-left: 7px;
-        padding-right: 7px; }
-        .filters-list li a .cross:hover {
-          color: #ef9094; }
 
 .modal-window {
   display: block !important; }
@@ -101,7 +91,7 @@
       color: #ef9094; }
 
 .filters-stack {
-  color: #848383;
+  color: #fff;
   position: relative;
   cursor: pointer; }
   .filters-stack:after {
@@ -114,25 +104,26 @@
     border-top: .3em solid;
     border-right: .3em solid transparent;
     border-left: .3em solid transparent; }
-  .filters-stack ul {
+  .filters-stack .list-unstyled {
     z-index: 100;
     display: none;
-    position: absolute;
+    position: relative;
     background-color: #fff;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); }
-    .filters-stack ul li {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width: 180px;
+    border-radius: 3px; }
+    .filters-stack .list-unstyled a {
+      color: #444 !important; }
+    .filters-stack .list-unstyled li {
       text-align: left;
-      padding: .5rem; }
+      padding: .5rem;
+      display: block; }
   .filters-stack:hover ul {
     display: block; }
 
 .btn {
   background-color: #ef9094;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 3px !important;
-  font-size: 1rem !important;
-  padding: .6rem .9rem !important; }
+  color: #fff; }
   .btn:hover {
     color: #fff; }
   .btn:focus {
@@ -147,7 +138,6 @@ button {
   background-color: transparent;
   background-image: none;
   white-space: nowrap;
-  touch-action: manipulation;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -172,21 +162,6 @@ button {
 
 .form-control {
   padding: .6rem .9rem !important; }
-
-.search-field {
-  display: flex;
-  width: 100%;
-  border: 1px solid #c5c5c5;
-  border-radius: 3px;
-  margin-bottom: .7rem;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
-  .search-field input {
-    border: none; }
-    .search-field input:focus {
-      border: none !important; }
-
-#focused {
-  border-color: #ef9094; }
 
 .drop-wrap .category-list {
   cursor: pointer; }
@@ -245,28 +220,32 @@ button {
     .card .card-header a {
       color: #ef9094; }
 
-.current-task h3 {
+.current-place h3 {
   text-transform: uppercase;
   color: #ef9094; }
 
-.current-task .colored-gray {
+.current-place .colored-gray {
   color: #abaaaa; }
 
-.map-show-task {
-  height: 200px;
-  width: 100%; }
+.place__images li {
+  display: inline-block;
+  width: 220px;
+  margin: 0 8px 10px 0;
+  vertical-align: top; }
+  .place__images li img {
+    width: 100%; }
 
-.place_guide {
+.place__guide {
   padding: 0;
   list-style: none; }
-  .place_guide__info {
+  .place__guide__item {
     margin-top: 15px; }
-    .place_guide__info h5 {
+    .place__guide__item h5 {
       font-size: 18px;
       margin-bottom: 0; }
-    .place_guide__info p {
+    .place__guide__item p {
       font-size: 14px; }
-    .place_guide__info .fa {
+    .place__guide__item .fa {
       background-color: #ef9094;
       float: left;
       width: 18px;
@@ -277,25 +256,94 @@ button {
       color: #fff;
       text-align: center;
       margin-top: 2px; }
-      .place_guide__info .fa + div {
+      .place__guide__item .fa + div {
         min-height: 18px;
         margin-left: 26px; }
+
+.place__sidebar p {
+  margin-bottom: 0; }
+
+.place__sidebar__item {
+  margin-bottom: 20px;
+  list-style-type: none; }
+
+.map-show-place {
+  height: 200px;
+  width: 100%; }
+
+.place__reviews .form-group {
+  margin-bottom: 20px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+  background-color: #f5f5f5; }
+
+.review {
+  margin-bottom: 20px;
+  border-radius: 3px;
+  padding: 14px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.18); }
+  .review--actions {
+    padding: 0;
+    display: flex;
+    font-size: 14px;
+    color: #929ba3; }
+    .review--actions > li {
+      display: inline-block;
+      margin-right: 12px;
+      white-space: nowrap; }
+    .review--actions li.save {
+      flex-grow: 1;
+      text-align: right; }
+    .review--actions li:last-child {
+      margin-right: 0; }
+    .review--actions a {
+      padding: 0;
+      color: inherit; }
+      .review--actions a .fa {
+        top: 2px;
+        margin-right: 4px; }
+  .review .avatar {
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; }
+    .review .avatar + div {
+      margin-bottom: 12px;
+      margin-right: 20px;
+      padding-top: 5px;
+      margin-left: 40px;
+      line-height: 20px; }
+      .review .avatar + div .name {
+        margin-right: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #2a2c2e; }
+  .review .rating {
+    font-size: 22px;
+    line-height: 1;
+    color: #ffa72e; }
+
+.meta {
+  font-size: 14px;
+  color: #929ba3; }
 
 .action-title {
   text-transform: uppercase;
   color: #ef9094; }
 
-.user-task {
+.user-place {
   margin-bottom: .5rem; }
-  .user-task a {
+  .user-place a {
     display: block;
     text-align: center;
     color: #ef9094;
     text-transform: uppercase;
     font-weight: 600; }
-    .user-task a:hover {
+    .user-place a:hover {
       color: #ef9094; }
-  .user-task .action-button {
+  .user-place .action-button {
     min-width: 50%; }
 
 .registration {
@@ -324,9 +372,46 @@ button {
   color: #ef9094; }
 
 .navbar-brand {
-  color: #ef9094; }
-  .navbar-brand:hover {
-    color: #ef9094; }
+  color: #fff; }
+
+.sitenav ul {
+  list-style: none; }
+
+.main-header nav {
+  background-color: #82baeb; }
+
+.search-field {
+  padding-left: 10px;
+  width: 340px;
+  display: flex;
+  position: relative;
+  padding-bottom: 25px; }
+  .search-field input {
+    border: none; }
+    .search-field input:focus {
+      border: none !important; }
+
+#focused {
+  border-color: #ef9094; }
+
+.nav-filter {
+  padding-bottom: 25px; }
+
+.filters-list {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  margin-bottom: 0; }
+  .filters-list li {
+    display: inline-block; }
+    .filters-list li a {
+      color: #fff !important; }
+      .filters-list li a .cross {
+        cursor: pointer;
+        padding-left: 7px;
+        padding-right: 7px; }
+        .filters-list li a .cross:hover {
+          color: #ef9094; }
 
 .NewPlace--heading {
   margin-bottom: 25px;
@@ -339,76 +424,63 @@ button {
   height: calc(2.25rem + 2px);
   padding: .4rem .9rem !important; }
 
-section.photos {
-  position: relative; }
-
-section.photos > div {
+.NewPlace section.photos > div {
   margin-bottom: 32px; }
 
-form.upload button {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  padding: 0;
-  line-height: 20px;
-  color: #ef9094; }
-
-form.upload {
-  width: 100%;
-  height: 100%; }
-
-form.upload label {
-  width: 100%;
-  height: 100%;
-  margin-bottom: 0;
-  border: dashed 5px #d4d6d8;
-  border-radius: 3px;
-  padding: 32px;
-  text-align: center;
-  cursor: pointer; }
-
-form.upload input[type=file] {
-  display: none; }
-
-form.upload span {
-  display: block;
-  width: 62px;
-  height: 62px;
-  margin: 0 auto 10px;
-  border-radius: 50%;
-  background-color: #afb5bc;
-  font-size: 62px;
-  line-height: 58px;
-  font-weight: bold;
-  color: #fff; }
-
-form.upload label:after {
-  content: "Add Photo";
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  color: #929ba3; }
-
-section.photos {
+.NewPlace section.photos {
   position: relative; }
 
-ul.photos {
+.NewPlace ul.photos {
   list-style: none;
   padding: 0; }
-
-ul.photos > li {
-  display: inline-block;
-  width: 224px;
-  height: 168px;
-  margin: 0 8px 16px;
-  font-size: 16px;
-  color: #929ba3;
-  text-align: center;
-  vertical-align: top;
-  overflow: hidden; }
-
-ul.photos > li img {
-  height: 100%; }
+  .NewPlace ul.photos > li {
+    display: inline-block;
+    width: 224px;
+    height: 168px;
+    margin: 0 8px 16px;
+    font-size: 16px;
+    color: #929ba3;
+    text-align: center;
+    vertical-align: top;
+    overflow: hidden; }
+    .NewPlace ul.photos > li > img {
+      height: 100%; }
+  .NewPlace ul.photos .upload {
+    width: 100%;
+    height: 100%; }
+  .NewPlace ul.photos span.btn {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding: 0;
+    line-height: 20px;
+    color: #ef9094; }
+  .NewPlace ul.photos label {
+    width: 100%;
+    height: 100%;
+    border: dashed 5px #d4d6d8;
+    padding: 32px;
+    position: relative;
+    cursor: pointer; }
+    .NewPlace ul.photos label:after {
+      content: "Add Photo";
+      display: block;
+      font-size: 18px;
+      font-weight: bold;
+      color: #929ba3; }
+  .NewPlace ul.photos input[type=file] {
+    display: none; }
+  .NewPlace ul.photos span.plus {
+    display: block;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #afb5bc;
+    font-size: 62px;
+    line-height: 58px;
+    font-weight: bold;
+    color: #fff; }
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

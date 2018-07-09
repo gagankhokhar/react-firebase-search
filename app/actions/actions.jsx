@@ -29,10 +29,10 @@ import moment from 'moment'
 
 // export const addReviews = (commentVal) => {
 //   return (dispatch, getState) => {
-//     const taskRef = firebaseRef.database().ref(`tasks/${id}`);
-//     const {id} = taskRef.key
+//     const placeRef = firebaseRef.database().ref(`places/${id}`);
+//     const {id} = placeRef.key
     
-//     const placeId = firebaseRef.database().ref(`tasks/${id}`);
+//     const placeId = firebaseRef.database().ref(`places/${id}`);
 
 //     const createdAt = moment().unix();
 //     const formatedDate = moment.unix(createdAt).format('DDDD, MMMM, YYYY');
@@ -46,7 +46,7 @@ import moment from 'moment'
 //     return commentRef.then(() => {
 //       dispatch(addComment({
 //         ...review,
-//         id: taskRef.key
+//         id: placeRef.key
 //       }))
 //     })
 //   }
@@ -56,7 +56,7 @@ import moment from 'moment'
 // export const startGetReviews = () => {
 //   return (dispatch, getState) => {
 //     const userId = firebaseRef.auth().currentUser.uid;
-//     const placeId = firebaseRef.database().ref(`tasks/${id}`);
+//     const placeId = firebaseRef.database().ref(`places/${id}`);
 
 //       const commentRef = firebaseRef.database().ref(`users/${placeId}/review`);
 //       return commentRef.once('value').then((snapshot) => {
@@ -75,41 +75,41 @@ import moment from 'moment'
 //   }
 // };
 
-export const startAddTask = (taskVal) => {
+export const startAddPlace = (placeVal) => {
   return (dispatch, getState) => {
     const createdAt = moment().unix();
     const formatedDate = moment.unix(createdAt).format('MMMM, YYYY');
-    const task =
+    const place =
       {
-        ...taskVal,
+        ...placeVal,
         createdAt,
         formatedDate
        };
-    const taskRef = firebaseRef.database().ref('tasks').push(task);
-    return taskRef.then(() => {
-      dispatch(addTask({
-        ...task,
-        id: taskRef.key
+    const placeRef = firebaseRef.database().ref('places').push(place);
+    return placeRef.then(() => {
+      dispatch(addPlace({
+        ...place,
+        id: placeRef.key
       }))
     })
   }
 };
 
-export const startGetTasks = () => {
+export const startGetPlaces = () => {
   return (dispatch, getState) => {
-      const taskRef = firebaseRef.database().ref('tasks');
-      return taskRef.once('value').then((snapshot) => {
-        const tasksVal = snapshot.val() || {};
-        let tasks = [];
-        const tasksKeys = Object.keys(tasksVal);
-        tasksKeys.forEach((id) => {
-          tasks.push({
+      const placeRef = firebaseRef.database().ref('places');
+      return placeRef.once('value').then((snapshot) => {
+        const placesVal = snapshot.val() || {};
+        let places = [];
+        const placesKeys = Object.keys(placesVal);
+        placesKeys.forEach((id) => {
+          places.push({
             id,
-            ...tasksVal[id]
+            ...placesVal[id]
           });
         });
-        // console.log(tasks);
-        dispatch(addTasks(tasks))
+        // console.log(places);
+        dispatch(addPlaces(places))
       })
   }
 };
@@ -119,7 +119,7 @@ export const startGetTasks = () => {
 
 export const show = (id) => {
     return (dispatch, getState) =>{
-        const showRef = firebaseRef.database().ref(`tasks/${id}`);
+        const showRef = firebaseRef.database().ref(`places/${id}`);
         return showRef.once('value')
     }
 }
@@ -143,12 +143,12 @@ export const startSort = (sort) => ({
 
 
 
-export const startEditTask = (task) => {
+export const startEditPlace = (place) => {
   return (dispatch, getState) => {
-    var taskRef = firebaseRef.database().ref('tasks/${task.id}');
+    var placeRef = firebaseRef.database().ref(`places/${place.id}`);
 
-    return taskRef.update(task).then(()=>{
-      dispatch(editTask(task))
+    return placeRef.update(place).then(()=>{
+      dispatch(editPlace(place))
     })
   }
 }
@@ -189,22 +189,22 @@ export const startLogout = () => {
   }
 }
 
-export const removeTask = (id) => {
+export const removePlace = (id) => {
   return {
-    type: 'REMOVE_TASK',
+    type: 'REMOVE_PLACE',
     id
   }
 };
 
-export const startRemovingTask = (id) => {
+export const startRemovingPlace = (id) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const taskRef = firebaseRef.database().ref(`tasks/${id}`);
-    return taskRef.once('value').then((snapshot) => {
-      const tasksVal = snapshot.val() || {};
-      if(uid === tasksVal.uid) {
-        return taskRef.remove().then(() => {
-          dispatch(removeTask(id))
+    const placeRef = firebaseRef.database().ref(`places/${id}`);
+    return placeRef.once('value').then((snapshot) => {
+      const placesVal = snapshot.val() || {};
+      if(uid === placesVal.uid) {
+        return placeRef.remove().then(() => {
+          dispatch(removePlace(id))
         })
       }
     })
@@ -226,18 +226,18 @@ export const logout = () => {
 };
 
 
-export const addTasks = (tasks) => {
+export const addPlaces = (places) => {
   return {
-    type:'ADD_TASKS',
-    tasks
+    type:'ADD_PLACES',
+    places
   }
 }
 
 
-export const addTask = (task) => {
+export const addPlace = (place) => {
   return {
-    type:'ADD_TASK',
-    task
+    type:'ADD_PLACE',
+    place
   };
 }
 
@@ -272,10 +272,10 @@ export const removeFilter = (key, property) => {
   }
 }
 
-export const editTask = (task) => {
+export const editPlace = (place) => {
   return {
-    type: 'EDIT_TASK',
-    task
+    type: 'EDIT_PLACE',
+    place
   }
 }
 

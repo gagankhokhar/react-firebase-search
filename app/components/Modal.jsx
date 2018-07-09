@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {startRemovingTask} from 'actions'
+import {startRemovingPlace} from 'actions'
 
 class Modal extends Component{
-  editTask (e) {
+  editPlace (e) {
     window.location = `#/edit/${this.props.id}`;
     e.preventDefault();
   }
   remove (e) {
     e.preventDefault();
-    this.props.dispatch(startRemovingTask(this.props.id))
+    this.props.dispatch(startRemovingPlace(this.props.id))
   }
   hide (e) {
     this.props.show();
@@ -19,7 +19,7 @@ class Modal extends Component{
     const {name, action} = this.props;
     const or = () => {
       if(action === 'edit') {
-        return <button onClick={this.editTask.bind(this)} type="button" className="btn">Yes</button>
+        return <button onClick={this.editPlace.bind(this)} type="button" className="btn">Yes</button>
       } else {
         return <button onClick={this.remove.bind(this)} type="button" className="btn">Yes</button>
       }
@@ -35,7 +35,7 @@ class Modal extends Component{
               </button>
             </div>
             <div className="modal-body">
-              <p>Start {action}ing <span className='colored-name'>{name}</span> task?</p>
+              <p>Start {action}ing <span className='colored-name'>{name}</span> place?</p>
             </div>
             <div className="modal-footer">
               {or()}

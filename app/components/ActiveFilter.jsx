@@ -12,7 +12,7 @@ class ActiveFilter extends Component {
     const {propKey, property} = this.props;
 
     return (
-      <li className='active-filter list-inline-item'>
+      <li className='active-filter'>
         <a>{property}<span onClick={this.handleRemove.bind(this)} data-key={propKey} className='ion-ios-close-outline cross'></span></a>
       </li>
     )

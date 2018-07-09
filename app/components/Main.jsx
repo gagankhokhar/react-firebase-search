@@ -11,11 +11,10 @@ class Main extends Component {
     return (
       <div className='main'>
         <TopBar/>
-        <div className='container-fluid'>
+        <div className='container'>
           <div className='row mt-3 mb-3'>
-            <SideBar/>
             <div className='col'>
-              <ControlsBar/>
+              
               {this.props.children}
             </div>
           </div>

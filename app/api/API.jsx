@@ -26,8 +26,8 @@ export const getPlace = (input) => {
 
 
 
-const searchTasks = (tasks, searchText) => {
- return  tasks.filter((item) => {
+const searchPlaces = (places, searchText) => {
+ return  places.filter((item) => {
     if((item.name.toLowerCase()).indexOf(searchText) != -1){
         return item;
       }
@@ -38,32 +38,32 @@ const searchTasks = (tasks, searchText) => {
 
 
 
-const sortArr = (tasks, sortVal) => {
-  return tasks.sort((a, b) => (b[sortVal]).toString().localeCompare((a[sortVal]).toString()))
+const sortArr = (places, sortVal) => {
+  return places.sort((a, b) => (b[sortVal]).toString().localeCompare((a[sortVal]).toString()))
 }
 
 
 
 
-const filterBy = (tasks) => {
+const filterBy = (places) => {
   return (filtValArr) => {
-    let tasksArr = [];
+    let placesArr = [];
     filtValArr.forEach((filtVal) => {
-      let filtered = tasks.filter((task) => {
-        if(task[filtVal.key].toLowerCase() === filtVal.property.toLowerCase() || filtVal.property === `All`){
-          return task
+      let filtered = places.filter((place) => {
+        if(place[filtVal.key].toLowerCase() === filtVal.property.toLowerCase() || filtVal.property === `All`){
+          return place
         }
       });
-      tasksArr = [...tasksArr, ...filtered]
+      placesArr = [...placesArr, ...filtered]
     });
-    return tasksArr;
+    return placesArr;
   }
 };
 
 
 
-export const composeFilter = (tasks, searchText, city, category, formatedDate, sortVal) => {
-  let rerender = searchTasks(tasks, searchText);
+export const composeFilter = (places, searchText, city, category, formatedDate, sortVal) => {
+  let rerender = searchPlaces(places, searchText);
   rerender = sortArr(rerender, sortVal);
   rerender = filterBy(rerender)(formatedDate);
   rerender = filterBy(rerender)(category);

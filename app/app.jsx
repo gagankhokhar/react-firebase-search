@@ -14,10 +14,10 @@ import * as actions from 'actions'
 
 const store = configure();
 
-store.dispatch(actions.startGetTasks());
+store.dispatch(actions.startGetPlaces());
 
 const locationCheck = () => {
-    if(window.location.hash.indexOf('task') === -1) {
+    if(window.location.hash.indexOf('place') === -1) {
           hashHistory.push('/')
       }
 };
